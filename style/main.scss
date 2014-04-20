@@ -36,11 +36,12 @@ body {
 }
 
 .heading {
+  margin-bottom: 8px;
   @include clearfix;
 }
 
 h1.title {
-  font-size: 80px;
+  font-size: 60px;
   font-weight: bold;
   margin: 0;
   display: block;
@@ -65,7 +66,7 @@ h1.title {
 }
 
 .score-container, .best-container {
-  $height: 25px;
+  $height: 18px;
 
   position: relative;
   display: inline-block;
@@ -398,13 +399,13 @@ hr {
         font-size: 12px;
 
         @include smaller($mobile-threshold) {
-          font-size: 10px;
+          font-size: 7px;
         }
       } @else if $power >= 10000 {
-        font-size: 7px;
+        font-size: 10px;
 
         @include smaller($mobile-threshold) {
-          font-size: 6px;
+          font-size: 5px;
         }
       }
     }
@@ -412,16 +413,10 @@ hr {
     $exponent: $exponent + 1;
   }
 
-  // Super tiles (above 2048)
+  // Super tiles (above 16384)
   &.tile-super .tile-inner {
     color: $bright-text-color;
     background: mix(#333, $tile-gold-color, 95%);
-
-    font-size: 30px;
-
-    @include smaller($mobile-threshold) {
-      font-size: 10px;
-    }
   }
 }
 
@@ -502,7 +497,7 @@ hr {
   }
 
   h1.title {
-    font-size: 27px;
+    font-size: 32px;
     margin-top: 15px;
   }
 
