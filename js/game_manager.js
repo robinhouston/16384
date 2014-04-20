@@ -20,7 +20,7 @@ GameManager.prototype.restart = function () {
   this.setup();
 };
 
-// Keep playing after winning (allows going over 2048)
+// Keep playing after winning (allows going over 16384)
 GameManager.prototype.keepPlaying = function () {
   this.keepPlaying = true;
   this.actuator.continueGame(); // Clear the game won/lost message
@@ -28,11 +28,7 @@ GameManager.prototype.keepPlaying = function () {
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
 GameManager.prototype.isGameTerminated = function () {
-  if (this.over || (this.won && !this.keepPlaying)) {
-    return true;
-  } else {
-    return false;
-  }
+  return this.over || (this.won && !this.keepPlaying);
 };
 
 // Set up the game
@@ -170,8 +166,8 @@ GameManager.prototype.move = function (direction) {
           // Update the score
           self.score += merged.value;
 
-          // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+          // The mighty 16384 tile
+          if (merged.value === 16384) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
@@ -211,6 +207,7 @@ GameManager.prototype.getVector = function (direction) {
 GameManager.prototype.buildTraversals = function (vector) {
   var traversals = { x: [], y: [] };
 
+console.log("this.size", this.size);
   for (var pos = 0; pos < this.size; pos++) {
     traversals.x.push(pos);
     traversals.y.push(pos);

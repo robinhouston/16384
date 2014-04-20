@@ -2,8 +2,8 @@
 @import "fonts/clear-sans.css";
 
 $field-width: 500px;
-$grid-spacing: 15px;
-$grid-row-cells: 4;
+$grid-spacing: 8px;
+$grid-row-cells: 12;
 $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
 $tile-border-radius: 3px;
 
@@ -404,7 +404,7 @@ hr {
     font-weight: bold;
     z-index: 10;
 
-    font-size: 55px;
+    font-size: 18px;
   }
 
   // Movement transition
@@ -415,7 +415,7 @@ hr {
 
   $base: 2;
   $exponent: 1;
-  $limit: 11;
+  $limit: 16;
 
   // Colors for all 11 states, false = no special color
   $special-colors: false false, // 2
@@ -428,7 +428,12 @@ hr {
                    false true, // 256
                    false true, // 512
                    false true, // 1024
-                   false true; // 2048
+                   false true, // 2048 (11)
+                   false true, // 4096 (12)
+                   false true, // 8192 (13)
+                   false true, // 16384 (14)
+                   false true, // 32768 (15)
+                   false true; // 65536 (16)
 
   // Build tile colors
   @while $exponent <= $limit {
@@ -465,17 +470,23 @@ hr {
 
       // Adjust font size for bigger numbers
       @if $power >= 100 and $power < 1000 {
-        font-size: 45px;
+        font-size: 14px;
 
         // Media queries placed here to avoid carrying over the rest of the logic
         @include smaller($mobile-threshold) {
-          font-size: 25px;
+          font-size: 10px;
         }
-      } @else if $power >= 1000 {
-        font-size: 35px;
+      } @else if $power >= 1000 and $power < 10000 {
+        font-size: 12px;
 
         @include smaller($mobile-threshold) {
-          font-size: 15px;
+          font-size: 10px;
+        }
+      } @else if $power >= 10000 {
+        font-size: 7px;
+
+        @include smaller($mobile-threshold) {
+          font-size: 6px;
         }
       }
     }
@@ -567,10 +578,10 @@ hr {
 @include smaller($mobile-threshold) {
   // Redefine variables for smaller screens
   $field-width: 280px;
-  $grid-spacing: 10px;
-  $grid-row-cells: 4;
+  $grid-spacing: 5px;
+  $grid-row-cells: 12;
   $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
-  $tile-border-radius: 3px;
+  $tile-border-radius: 1px;
   $game-container-margin-top: 17px;
 
   html, body {
@@ -623,7 +634,7 @@ hr {
 
   // Rest of the font-size adjustments in the tile class
   .tile .tile-inner {
-    font-size: 35px;
+    font-size: 12px;
   }
 
   .game-message {
